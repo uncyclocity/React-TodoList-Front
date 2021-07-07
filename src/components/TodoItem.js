@@ -112,26 +112,29 @@ function TodoItem({ id, done, text }) {
   console.log("TodoItem()");
 
   const dispatch = useTodoDispatch();
+
   const [rmCnt, setRmCnt] = useState(false);
 
   const onRemove = useCallback(() => {
-    const rmTarget = {
-      type: "REMOVE_TODO",
-      id,
-    };
-    setRmCnt(true);
-    setTimeout(() => {
-      dispatch(rmTarget);
-    }, 250);
-  }, [dispatch, id]);
+      const rmTarget = {
+        type: "REMOVE_TODO",
+        id,
+      };
 
-  const onCheck = useCallback(() => {
-    dispatch({
-      type: "CHECK_TODO",
-      id,
-      isDone: !done,
-    });
-  }, [dispatch, done, id]);
+      setRmCnt(true);
+      setTimeout(() => {
+        dispatch(rmTarget);
+      }, 250);
+    }, [dispatch, id]),
+    onCheck = useCallback(() => {
+      const ckTarget = {
+        type: "CHECK_TODO",
+        id,
+        isDone: !done,
+      };
+
+      dispatch(ckTarget);
+    }, [dispatch, done, id]);
 
   return (
     <TodoItemBlock rmCnt={rmCnt}>

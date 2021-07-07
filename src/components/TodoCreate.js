@@ -112,12 +112,12 @@ const Input = styled.input`
 function TodoCreate() {
   console.log("TodoCreate()");
 
-  const [open, setOpen] = useState(false);
-  const [localOpen, setLocalOpen] = useState(open);
-  const [animate, setAnimate] = useState(false);
+  const [open, setOpen] = useState(false),
+    [localOpen, setLocalOpen] = useState(open),
+    [animate, setAnimate] = useState(false);
 
-  const dispatch = useTodoDispatch();
-  const nextId = useTodoNextId();
+  const dispatch = useTodoDispatch(),
+    nextId = useTodoNextId();
 
   const textInput = useRef();
 
@@ -125,24 +125,23 @@ function TodoCreate() {
 
   const onSubmit = useCallback(
     (e) => {
-      if (open) {
-        const text = textInput.current.value,
-          isDone = false;
+      const text = textInput.current.value;
+      e.preventDefault();
 
-        e.preventDefault();
-
-        dispatch({
+      if (open && text) {
+        const addTarget = {
           type: "CREATE_TODO",
           newtodo: {
             id: nextId.current,
             text,
-            isDone,
+            isDone: false,
           },
-        });
+        };
 
-        onToggle();
+        dispatch(addTarget);
         nextId.current += 1;
       }
+      onToggle();
     },
     [dispatch, nextId, onToggle, open]
   );
@@ -154,6 +153,10 @@ function TodoCreate() {
     }
     setLocalOpen(open);
   }, [open, localOpen]);
+
+  window.onkeydown = (e) => {
+    e.key === "Enter" && !open && onToggle();
+  };
 
   return (
     <>

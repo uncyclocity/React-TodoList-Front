@@ -1,9 +1,18 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { darken, lighten } from "polished";
 import TodoItem from "./TodoItem";
 import { IoIosCloudOutline } from "react-icons/io";
 import { useTodos } from "../TodoContext";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+`;
 
 const TodoListBlock = styled.div`
   flex: 1;
@@ -53,6 +62,11 @@ const NotExist = styled.div`
     width: 100%;
     font-size: 100px;
   }
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${fadeIn};
+  animation-fill-mode: forwards;
 `;
 
 function TodoList() {
