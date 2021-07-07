@@ -1,14 +1,8 @@
-import React, {
-  useState,
-  useContext,
-  useRef,
-  useCallback,
-  useEffect,
-} from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { MdAdd } from "react-icons/md";
 import { darken, lighten } from "polished";
-import { UserDispatch } from "../TodoContext";
+import { useTodoDispatch, useTodoNextId } from "../TodoContext";
 
 const slideUp = keyframes`
   from {
@@ -87,10 +81,7 @@ const InsertFormPositioner = styled.div`
 
 const InsertForm = styled.form`
   background: #f8f9fa;
-  padding-left: 32px;
-  padding-top: 32px;
-  padding-right: 32px;
-  padding-bottom: 72px;
+  padding: 32px 32px 72px 32px;
 
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
@@ -124,10 +115,11 @@ function TodoCreate() {
   const [open, setOpen] = useState(false);
   const [localOpen, setLocalOpen] = useState(open);
   const [animate, setAnimate] = useState(false);
-  const dispatch = useContext(UserDispatch);
+
+  const dispatch = useTodoDispatch();
+  const nextId = useTodoNextId();
 
   const textInput = useRef();
-  const idNum = useRef(0);
 
   const onToggle = useCallback(() => setOpen(!open), [open]);
 
@@ -142,19 +134,17 @@ function TodoCreate() {
         dispatch({
           type: "CREATE_TODO",
           newtodo: {
-            id: idNum.current,
+            id: nextId.current,
             text,
             isDone,
           },
         });
 
-        dispatch({ type: "REFRESH_ISDONE" });
-
-        idNum.current += 1;
         onToggle();
+        nextId.current += 1;
       }
     },
-    [dispatch, onToggle, open]
+    [dispatch, nextId, onToggle, open]
   );
 
   useEffect(() => {

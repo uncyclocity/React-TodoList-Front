@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { darken, lighten } from "polished";
 import TodoItem from "./TodoItem";
 import { IoIosCloudOutline } from "react-icons/io";
-import { UserState } from "../TodoContext";
+import { useTodos } from "../TodoContext";
 
 const TodoListBlock = styled.div`
   flex: 1;
@@ -58,7 +58,7 @@ const NotExist = styled.div`
 function TodoList() {
   console.log("TodoList()");
 
-  const todos = useContext(UserState).todos;
+  const todos = useTodos();
 
   if (todos.length <= 0)
     return (

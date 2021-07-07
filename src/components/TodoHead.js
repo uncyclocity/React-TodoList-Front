@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { MdAddCircleOutline } from "react-icons/md";
-import { UserState } from "../TodoContext";
+import { useTodos } from "../TodoContext";
 
 const TodoHeadStyle = styled.div`
   padding-top: 48px;
@@ -34,33 +34,24 @@ const TodoHeadStyle = styled.div`
 function TodoHead() {
   console.log("TodoHead()");
 
-  const state = useContext(UserState),
-    todosLen = state.todos.length,
-    notDone = state.notDone;
+  const todos = useTodos(),
+    notDone = todos.filter((todo) => !todo.isDone).length,
+    todosLen = todos.length;
 
   const today = new Date();
 
-  const year = today.getFullYear(),
-    month = today.getMonth() + 1,
-    date = today.getDate(),
-    day = today.getDay();
+  const dateString = today.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
-  const dayArr = [
-    "일요일",
-    "월요일",
-    "화요일",
-    "수요일",
-    "목요일",
-    "금요일",
-    "토요일",
-  ];
+  const day = today.toLocaleDateString("ko-KR", { weekday: "long" });
 
   return (
     <TodoHeadStyle>
-      <h1>
-        {year}년 {month}월 {date}일
-      </h1>
-      <div className="day">{dayArr[day]}</div>
+      <h1>{dateString}</h1>
+      <div className="day">{day}</div>
       <div className="tasks-left">
         {todosLen > 0 && notDone === 0 && "모든 할일을 마치셨어요!"}
         {todosLen === 0 && notDone === 0 && (

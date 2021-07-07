@@ -23,4 +23,4 @@ function TodoTemplate({ children }) {
   return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
 }
 
-export default React.memo(TodoTemplate);
+export default TodoTemplate;

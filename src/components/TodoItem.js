@@ -1,7 +1,7 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { MdDone, MdDelete } from "react-icons/md";
-import { UserDispatch } from "../TodoContext";
+import { useTodoDispatch } from "../TodoContext";
 
 const slideUp = keyframes`
   from {
@@ -111,12 +111,8 @@ const Text = styled.div`
 function TodoItem({ id, done, text }) {
   console.log("TodoItem()");
 
-  const dispatch = useContext(UserDispatch);
+  const dispatch = useTodoDispatch();
   const [rmCnt, setRmCnt] = useState(false);
-
-  const onRefreshNum = useCallback(() => {
-    dispatch({ type: "REFRESH_ISDONE" });
-  }, [dispatch]);
 
   const onRemove = useCallback(() => {
     const rmTarget = {
@@ -126,9 +122,8 @@ function TodoItem({ id, done, text }) {
     setRmCnt(true);
     setTimeout(() => {
       dispatch(rmTarget);
-      onRefreshNum();
     }, 250);
-  }, [dispatch, id, onRefreshNum]);
+  }, [dispatch, id]);
 
   const onCheck = useCallback(() => {
     dispatch({
@@ -136,8 +131,7 @@ function TodoItem({ id, done, text }) {
       id,
       isDone: !done,
     });
-    onRefreshNum();
-  }, [dispatch, done, id, onRefreshNum]);
+  }, [dispatch, done, id]);
 
   return (
     <TodoItemBlock rmCnt={rmCnt}>
