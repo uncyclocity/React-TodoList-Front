@@ -6,12 +6,8 @@ import { IoIosCloudOutline } from "react-icons/io";
 import { useTodos } from "../TodoContext";
 
 const fadeIn = keyframes`
-  from {
-    opacity: 0
-  }
-  to {
-    opacity: 1
-  }
+  from { opacity: 0 }
+  to { opacity: 1 }
 `;
 
 const TodoListBlock = styled.div`
@@ -28,7 +24,7 @@ const TodoListBlock = styled.div`
   &::-webkit-scrollbar-thumb {
     background: #85e7c9;
     border-radius: 50px;
-    transition: 0.15s all ease-in-out;
+    transition: 0.15s all ease-in;
     &:hover {
       background: ${lighten(0.1, "#85e7c9")};
     }
@@ -63,9 +59,7 @@ const NotExist = styled.div`
     font-size: 100px;
   }
 
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-name: ${fadeIn};
+  animation: 0.25s ease-out 0s ${fadeIn};
   animation-fill-mode: forwards;
 `;
 

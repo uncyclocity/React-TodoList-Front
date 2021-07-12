@@ -1,95 +1,88 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import styled, { css, keyframes } from "styled-components";
-import { MdAdd } from "react-icons/md";
-import { darken, lighten } from "polished";
 import { useTodoDispatch, useTodoNextId } from "../TodoContext";
+import styled, { css, keyframes } from "styled-components";
+import { darken, lighten } from "polished";
+import { MdAdd } from "react-icons/md";
+
+const slideUpped = css`
+  transform: translateY(0px);
+`;
+
+const slideDowned = css`
+  transform: translateY(5px);
+  opacity: 0;
+`;
 
 const slideUp = keyframes`
-  from {
-    transform: translateY(5px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0px);
-  }
+  from { ${slideDowned} }
+  to { ${slideUpped} }
 `;
 
 const slideDown = keyframes`
-  from {
-    transform: translateY(0px);
-  }
-
-  to {
-    transform: translateY(5px);
-    opacity: 0;
-  }
+  from { ${slideUpped} }
+  to { ${slideDowned} }
 `;
 
+const btnColor = (color) => {
+  return css`
+    background: ${color};
+    &:hover {
+      background: ${lighten(0.1, color)};
+    }
+    &:active {
+      background: ${darken(0.1, color)};
+    }
+    box-shadow: 0 0 8px 0 ${color};
+  `;
+};
+
 const CircleButton = styled.div`
-  background: #38d9a9;
-  &:hover {
-    background: ${lighten(0.1, "#38d9a9")};
-  }
-  &:active {
-    background: ${darken(0.1, "#38d9a9")};
-  }
+  ${btnColor("#38d9a9")}
 
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  outline: none;
-  border: none;
+
   cursor: pointer;
 
-  font-size: 60px;
-  color: white;
-
-  z-index: 5;
   position: absolute;
   left: 88%;
   bottom: 0px;
+
+  transition: 0.15s all ease-in;
+
   transform: translate(-50%, 50%);
 
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 8px 0 #38d9a9;
-  transition: 0.15s all ease-in-out;
+
+  font-size: 60px;
+  color: white;
 
   ${(props) =>
     props.open &&
     css`
-      background: #ff6b6b;
-      box-shadow: 0 0 8px 0 #ff6b6b;
-      &:hover {
-        background: ${lighten(0.1, "#ff6b6b")};
-      }
-      &:active {
-        background: ${lighten(0.1, "#ff6b6b")};
-      }
+      ${btnColor("#ff6b6b")}
       transform: translate(-50%, 50%) rotate(45deg);
     `}
 `;
 
 const InsertFormPositioner = styled.div`
   width: 100%;
+  position: absolute;
   bottom: 0;
   left: 0;
-  position: absolute;
 `;
 
 const InsertForm = styled.form`
   background: #f8f9fa;
   padding: 32px 32px 72px 32px;
 
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+  border-radius: 0 0 16px 16px;
   border-top: 1px solid #e9ecef;
 
-  animation-duration: 0.25s;
-  animation-name: ${slideUp};
-  animation-timing-function: ease-out;
+  animation: 0.25s ease-out 0s ${slideUp};
   animation-fill-mode: forwards;
 
   ${(props) =>
@@ -100,10 +93,10 @@ const InsertForm = styled.form`
 `;
 
 const Input = styled.input`
+  width: 100%;
   padding: 12px;
   border-radius: 4px;
   border: 1px solid #dee2e6;
-  width: 100%;
   outline: none;
   font-size: 18px;
   box-sizing: border-box;
@@ -121,11 +114,15 @@ function TodoCreate() {
 
   const textInput = useRef();
 
-  const onToggle = useCallback(() => setOpen(!open), [open]);
+  const onToggle = useCallback(() => {
+    setOpen(!open);
+    if (animate) textInput.current.value = "";
+  }, [open, animate]);
 
   const onSubmit = useCallback(
     (e) => {
       const text = textInput.current.value;
+
       e.preventDefault();
 
       if (open && text) {
@@ -155,7 +152,7 @@ function TodoCreate() {
   }, [open, localOpen]);
 
   window.onkeydown = (e) => {
-    e.key === "Enter" && !open && onToggle();
+    e.key === "Enter" && !animate && !open && onToggle();
   };
 
   return (

@@ -29,37 +29,33 @@ const slideDown = keyframes`
 `;
 
 const Remove = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
+
   font-size: 24px;
   cursor: pointer;
-  transition: 0.25s all ease-in-out;
+  transition: 0.25s all ease-in;
 
   color: #dee2e6;
   &:hover {
     color: #ff6b6b;
   }
-
-  display: none;
 `;
 
 const TodoItemBlock = styled.div`
   display: flex;
   align-itmes: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 12px 0 12px 0;
 
   &:hover {
     ${Remove} {
-      display: initial;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
+  animation: 0.25s ease-out 0s ${slideUp};
   animation-fill-mode: forwards;
-  animation-name: ${slideUp};
 
   ${(props) =>
     props.rmCnt &&
@@ -71,13 +67,16 @@ const TodoItemBlock = styled.div`
 const CheckCircle = styled.div`
   width: 32px;
   height: 32px;
+  margin-right: 20px;
+
   border-radius: 16px;
   border: 1px solid #ced4da;
   font-size: 24px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 20px;
+
   cursor: pointer;
   transition: 0.25s all ease-in-out;
 
@@ -116,25 +115,22 @@ function TodoItem({ id, done, text }) {
   const [rmCnt, setRmCnt] = useState(false);
 
   const onRemove = useCallback(() => {
-      const rmTarget = {
+    setRmCnt(true);
+    setTimeout(() => {
+      dispatch({
         type: "REMOVE_TODO",
         id,
-      };
+      });
+    }, 250);
+  }, [dispatch, id]);
 
-      setRmCnt(true);
-      setTimeout(() => {
-        dispatch(rmTarget);
-      }, 250);
-    }, [dispatch, id]),
-    onCheck = useCallback(() => {
-      const ckTarget = {
-        type: "CHECK_TODO",
-        id,
-        isDone: !done,
-      };
-
-      dispatch(ckTarget);
-    }, [dispatch, done, id]);
+  const onCheck = useCallback(() => {
+    dispatch({
+      type: "CHECK_TODO",
+      id,
+      isDone: !done,
+    });
+  }, [dispatch, done, id]);
 
   return (
     <TodoItemBlock rmCnt={rmCnt}>

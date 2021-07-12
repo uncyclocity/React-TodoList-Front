@@ -1,24 +1,24 @@
-import React from "react";
-import styled from "styled-components";
 import { MdAddCircleOutline } from "react-icons/md";
 import { useTodos } from "../TodoContext";
+import styled from "styled-components";
+import React from "react";
 
 const TodoHeadStyle = styled.div`
-  padding-top: 48px;
-  padding-left: 32px;
-  padding-right: 32px;
-  padding-bottom: 24px;
+  padding: 48px 32px 24px 32px;
   border-bottom: 1px solid #e9ecef;
+
   h1 {
     margin: 0;
     font-size: 36px;
     color: #343a40;
   }
+
   .day {
     margin-top: 4px;
     font-size: 21px;
     color: #868e96;
   }
+
   .tasks-left {
     color: #20c997;
     font-size: 18px;
