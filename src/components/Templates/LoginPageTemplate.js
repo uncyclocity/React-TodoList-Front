@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import TodoHead from "../Organisms/TodoHead";
-import TodoList from "../Organisms/TodoList";
-import TodoCreate from "../Organisms/TodoCreate";
 import CtnWindow from "../Atoms/Container/CtnWindow";
+import Login from "../Organisms/Login";
+import Logo from "../Organisms/Logo";
 
 const Styles = styled.div`
   display: flex;
@@ -11,13 +10,12 @@ const Styles = styled.div`
   margin-bottom: 32px;
 `;
 
-export default function Template() {
+export default function LoginPageTemplate() {
   return (
     <Styles>
       <CtnWindow>
-        <TodoHead />
-        <TodoList />
-        <TodoCreate />
+        <Logo />
+        <Login />
       </CtnWindow>
     </Styles>
   );

@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
-import Template from "./components/Templates/Template";
+import LoginPageTemplate from "./components/Templates/LoginPageTemplate";
+import TodoPageTemplate from "./components/Templates/TodoPageTemplate";
 import TodoContext from "./TodoContext";
 
 // 전역적으로 스타일 적용하기 : createGlobalStyle 활용
@@ -20,7 +21,8 @@ function App() {
     <>
       <GlobalStyle />
       <TodoContext>
-        <Template />
+        {/* <LoginPageTemplate /> */}
+        <TodoPageTemplate />
       </TodoContext>
     </>
   );
