@@ -1,9 +1,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { darken, lighten } from "polished";
-import TodoItem from "./TodoItem";
+import TodoItem from "../Molecules/TodoItem";
 import { IoIosCloudOutline } from "react-icons/io";
-import { useTodos } from "../TodoContext";
+import { useTodos } from "../../TodoContext";
 
 const fadeIn = keyframes`
   from { opacity: 0 }

@@ -1,8 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import TodoTemplate from "./components/TodoTemplate";
-import TodoHead from "./components/TodoHead";
-import TodoList from "./components/TodoList";
-import TodoCreate from "./components/TodoCreate";
+import Template from "./components/Templates/Template";
 import TodoContext from "./TodoContext";
 
 // 전역적으로 스타일 적용하기 : createGlobalStyle 활용
@@ -22,13 +19,9 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <TodoTemplate>
-        <TodoContext>
-          <TodoHead />
-          <TodoList />
-          <TodoCreate />
-        </TodoContext>
-      </TodoTemplate>
+      <TodoContext>
+        <Template />
+      </TodoContext>
     </>
   );
 }
