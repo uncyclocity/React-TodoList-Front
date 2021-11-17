@@ -16,9 +16,7 @@ function TodoItem({ id, done, text }) {
   console.log("TodoItem()");
 
   const dispatch = useTodoDispatch();
-
   const [rmCnt, setRmCnt] = useState(false);
-
   const [isViewRmBtn, setIsViewRmBtn] = useState(false);
 
   const onRemove = useCallback(() => {

@@ -1,35 +1,9 @@
 import { MdAddCircleOutline } from "react-icons/md";
 import { useTodos } from "../../TodoContext";
-import styled from "styled-components";
 import React from "react";
-
-const TodoHeadStyle = styled.div`
-  padding: 48px 32px 24px 32px;
-  border-bottom: 1px solid #e9ecef;
-
-  h1 {
-    margin: 0;
-    font-size: 36px;
-    color: #343a40;
-  }
-
-  .day {
-    margin-top: 4px;
-    font-size: 21px;
-    color: #868e96;
-  }
-
-  .tasks-left {
-    color: #20c997;
-    font-size: 18px;
-    margin-top: 40px;
-    font-weight: bold;
-    .addIcon {
-      font-size: 20px;
-      transform: translate(0, 16%);
-    }
-  }
-`;
+import CtnTodoHead from "../Atoms/Container/CtnTodoHead";
+import TxtTaskGuide from "../Atoms/Text/TxtTaskGuide";
+import TodoHeadTodayInfo from "../Molecules/TodoHeadTodayInfo";
 
 function TodoHead() {
   console.log("TodoHead()");
@@ -61,11 +35,10 @@ function TodoHead() {
     };
 
   return (
-    <TodoHeadStyle>
-      <h1>{dateString}</h1>
-      <div className="day">{day}</div>
-      <div className="tasks-left">{message()}</div>
-    </TodoHeadStyle>
+    <CtnTodoHead>
+      <TodoHeadTodayInfo dateString={dateString} day={day} />
+      <TxtTaskGuide msg={message()} />
+    </CtnTodoHead>
   );
 }
 

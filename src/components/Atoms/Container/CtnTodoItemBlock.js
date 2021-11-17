@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { slideUp, slideDown } from "../../../keyfremes/slide";
+import { slideUp, slideDown } from "../../../keyfremes/TodoItemAnimation";
 
 // CtnTodoItemBlock
 // 분류 : 컨테이너
