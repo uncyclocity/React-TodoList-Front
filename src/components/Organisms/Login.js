@@ -10,16 +10,14 @@ const Styles = styled.div`
 `;
 
 export default function Login() {
-  const url = new URL(window.location.href);
+  const redirectUri = "http://localhost:3000/logining";
 
   const kakaoLogin = () => {
     const { Kakao } = window;
     Kakao.Auth.authorize({
-      redirectUri: "http://localhost:3000/",
+      redirectUri,
     });
   };
-
-  console.log(url.searchParams.get("code"));
 
   return (
     <Styles onClick={kakaoLogin}>

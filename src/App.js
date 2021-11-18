@@ -1,7 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+import LoginingPageTemplate from "./components/Templates/LoginingPageTemplate";
 import LoginPageTemplate from "./components/Templates/LoginPageTemplate";
 import TodoPageTemplate from "./components/Templates/TodoPageTemplate";
 import TodoContext from "./TodoContext";
+import { Routes, Route } from "react-router-dom";
 
 // 전역적으로 스타일 적용하기 : createGlobalStyle 활용
 const GlobalStyle = createGlobalStyle`
@@ -21,8 +23,11 @@ function App() {
     <>
       <GlobalStyle />
       <TodoContext>
-        {/* <LoginPageTemplate /> */}
-        <TodoPageTemplate />
+        <Routes>
+          <Route path="/" exact={true} element={<TodoPageTemplate />} />
+          <Route path="/login" element={<LoginPageTemplate />} />
+          <Route path="/logining" element={<LoginingPageTemplate />} />
+        </Routes>
       </TodoContext>
     </>
   );

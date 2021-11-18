@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import loginVerification from "../../loginVerification";
 import CtnWindow from "../Atoms/Container/CtnWindow";
-import Login from "../Organisms/Login";
-import Logo from "../Organisms/Logo";
+import Logining from "../Organisms/Logining";
 
 const Styles = styled.div`
   display: flex;
@@ -11,12 +10,11 @@ const Styles = styled.div`
   margin-bottom: 32px;
 `;
 
-export default function LoginPageTemplate() {
+export default function LoginingPageTemplate() {
   return (
     <Styles>
       <CtnWindow>
-        <Logo />
-        <Login />
+        <Logining />
       </CtnWindow>
     </Styles>
   );
