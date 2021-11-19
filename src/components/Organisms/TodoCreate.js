@@ -1,5 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
+import instance from "../../instance";
 import { useTodoDispatch, useTodoNextId } from "../../TodoContext";
+import { useUser } from "../../UserContext";
 import BtnInCreateTodoWindow from "../Atoms/Button/BtnInCreateTodoWindow";
 import TodoInsertForm from "../Molecules/TodoInsertForm";
 
@@ -9,6 +11,12 @@ function TodoCreate() {
   const [open, setOpen] = useState(false),
     [localOpen, setLocalOpen] = useState(open),
     [animate, setAnimate] = useState(false);
+
+  const {
+    id: userId,
+    platform: userPlatform,
+    nickname: userNickname,
+  } = useUser();
 
   const dispatch = useTodoDispatch(),
     nextId = useTodoNextId();
@@ -22,26 +30,36 @@ function TodoCreate() {
 
   const onSubmit = useCallback(
     (e) => {
-      const text = textInput.current.value;
-
-      e.preventDefault();
-
-      if (open && text) {
-        const addTarget = {
-          type: "CREATE_TODO",
-          newtodo: {
-            id: nextId.current,
-            text,
-            isDone: false,
-          },
-        };
-
-        dispatch(addTarget);
-        nextId.current += 1;
+      if (userId && userPlatform && userNickname) {
+        const text = textInput.current.value;
+        e.preventDefault();
+        if (open && text) {
+          const addTarget = {
+            type: "CREATE_TODO",
+            newtodo: {
+              id: nextId.current,
+              text,
+              isDone: false,
+            },
+          };
+          dispatch(addTarget);
+          instance({
+            method: "POST",
+            url: "/api/createTodo",
+            data: {
+              userId,
+              userPlatform,
+              id: nextId.current,
+              text,
+              isDone: false,
+            },
+          });
+          nextId.current += 1;
+        }
+        onToggle();
       }
-      onToggle();
     },
-    [dispatch, nextId, onToggle, open]
+    [dispatch, nextId, onToggle, open, userId, userNickname, userPlatform]
   );
 
   useEffect(() => {

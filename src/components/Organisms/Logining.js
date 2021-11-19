@@ -2,6 +2,8 @@ import styled from "styled-components";
 import instance from "../../instance";
 import IcoLoadingRing from "../Atoms/Icon/IcoLoadingRing";
 import { useEffect, useRef, useState } from "react";
+import { useUserDispatch } from "../../UserContext";
+import { useNavigate } from "react-router";
 
 const Styles = styled.div`
   display: flex;
@@ -14,29 +16,71 @@ const Styles = styled.div`
 export default function Logining() {
   const url = new URL(window.location.href);
   const code = url.searchParams.get("code");
+  const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState({});
-  const userInfoFirstCnt = useRef(0);
+  const getUserInfoFirstCnt = useRef(0);
+  const loginUserFirstCnt = useRef(0);
+  const userDispatch = useUserDispatch();
+  const navigate = useNavigate();
 
-  const sendAuthCode = async (code) => {
+  const getAccessToken = async (code) => {
     await instance({
       method: "GET",
       url: `/api/getAccessToken?code=${code}`,
     }).then((res) => {
-      const { id, nickname } = res.data;
-      setUserInfo({ id, nickname });
+      setAccessToken(res.data.ACCESS_TOKEN);
+    });
+  };
+
+  const getUserInfo = async (accessToken) => {
+    await instance({
+      method: "GET",
+      url: `/api/getUserInfo?ACCESS_TOKEN=${accessToken}`,
+    }).then((res) => {
+      setUserInfo(res.data);
+    });
+  };
+
+  const loginUser = async (userInfo) => {
+    const { id, nickname, platform } = userInfo;
+    await instance({
+      method: "POST",
+      url: `/api/createMember`,
+      data: {
+        id,
+        nickname,
+        platform,
+      },
+    });
+    userDispatch({
+      type: "initiate",
+      id,
+      platform,
+      nickname,
     });
   };
 
   useEffect(() => {
-    sendAuthCode(code);
+    getAccessToken(code);
   }, [code]);
 
   useEffect(() => {
-    if (userInfoFirstCnt.current <= 0) {
-      userInfoFirstCnt.current = 1;
+    if (getUserInfoFirstCnt.current <= 0) {
+      getUserInfoFirstCnt.current = 1;
     } else {
-      console.log(userInfo);
+      localStorage.setItem("accessToken", accessToken);
+      getUserInfo(accessToken);
     }
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (loginUserFirstCnt.current <= 0) {
+      loginUserFirstCnt.current = 1;
+    } else {
+      loginUser(userInfo);
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo]);
 
   return (
