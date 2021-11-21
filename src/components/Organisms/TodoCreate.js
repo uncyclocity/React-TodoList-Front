@@ -30,9 +30,9 @@ function TodoCreate() {
 
   const onSubmit = useCallback(
     (e) => {
+      e.preventDefault();
       if (userId && userPlatform && userNickname) {
         const text = textInput.current.value;
-        e.preventDefault();
         if (open && text) {
           const addTarget = {
             type: "CREATE_TODO",
@@ -57,6 +57,8 @@ function TodoCreate() {
           nextId.current += 1;
         }
         onToggle();
+      } else {
+        alert("로그인이 필요합니다.");
       }
     },
     [dispatch, nextId, onToggle, open, userId, userNickname, userPlatform]

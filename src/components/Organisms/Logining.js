@@ -43,6 +43,12 @@ export default function Logining() {
 
   const loginUser = async (userInfo) => {
     const { id, nickname, platform } = userInfo;
+    userDispatch({
+      type: "initiate",
+      id,
+      platform,
+      nickname,
+    });
     await instance({
       method: "POST",
       url: `/api/createMember`,
@@ -51,12 +57,6 @@ export default function Logining() {
         nickname,
         platform,
       },
-    });
-    userDispatch({
-      type: "initiate",
-      id,
-      platform,
-      nickname,
     });
   };
 
@@ -77,8 +77,7 @@ export default function Logining() {
     if (loginUserFirstCnt.current <= 0) {
       loginUserFirstCnt.current = 1;
     } else {
-      loginUser(userInfo);
-      navigate("/");
+      loginUser(userInfo).then(() => navigate("/"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo]);

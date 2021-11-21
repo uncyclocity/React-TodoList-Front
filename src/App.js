@@ -19,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
 
     display: flex;
     justify-content: center;
-    margin-top: 96px;
-    margin-bottom: 32px;
+    margin-top: 90px;
+    margin-bottom: 60px;
   }
 `;
 
