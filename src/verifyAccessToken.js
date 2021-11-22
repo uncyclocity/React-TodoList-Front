@@ -33,7 +33,6 @@ export default function verifyAccessToken(userDispatch, navigate) {
   let storedAccessToken = localStorage.getItem("accessToken");
 
   if (storedAccessToken) {
-    console.log("ㅎㅇ");
     getUserInfo(storedAccessToken);
   } else {
     navigate("/login");

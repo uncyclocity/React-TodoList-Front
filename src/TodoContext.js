@@ -4,6 +4,8 @@ const initialState = [];
 
 function reducer(todos, action) {
   switch (action.type) {
+    case "INIT_TODO":
+      return action.initTodo;
     case "CREATE_TODO":
       return todos.concat(action.newtodo);
     case "REMOVE_TODO":
