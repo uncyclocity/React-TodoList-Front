@@ -7,7 +7,7 @@ import styled from "styled-components";
 const Styles = styled.div`
   font-size: 36px;
   color: #343a40;
-  font-weight: bold;
+  font-family: "NanumSquareEB";
 `;
 
 export default function TxtTodayMonthAndDate({ dateString }) {

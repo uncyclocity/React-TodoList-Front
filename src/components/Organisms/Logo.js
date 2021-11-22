@@ -9,6 +9,8 @@ const Styles = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background: #20c997;
+  border-radius: 16px 16px 0 0;
 `;
 
 export default function Logo() {

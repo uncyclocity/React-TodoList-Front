@@ -6,7 +6,9 @@ import styled from "styled-components";
 
 const Styles = styled.div`
   font-size: 30px;
-  color: #20c997;
+  color: #ffffff;
+  font-family: "NanumSquareEB";
+  text-align: center;
 `;
 
 export default function TxtLogo() {

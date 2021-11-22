@@ -8,7 +8,7 @@ import { IoIosCloudOutline } from "react-icons/io";
 const Styles = styled.div`
   font-size: 100px;
   height: 100px;
-  color: #20c997;
+  color: #ffffff;
 `;
 
 export default function IcoLogo() {

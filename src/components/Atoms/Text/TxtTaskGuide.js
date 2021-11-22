@@ -8,11 +8,11 @@ const Styles = styled.div`
   color: #20c997;
   font-size: 18px;
   margin-top: 40px;
-  font-weight: bold;
   .addIcon {
     font-size: 20px;
     transform: translate(0, 16%);
   }
+  font-family: "NanumSquareEB";
 `;
 
 export default function TxtTaskGuide({ msg }) {

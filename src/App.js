@@ -6,6 +6,7 @@ import LoginPage from "./components/Pages/LoginPage";
 import TodoPage from "./components/Pages/TodoPage";
 import TodoContext from "./components/Contexts/TodoContext";
 import UserContext from "./components/Contexts/UserContext";
+import "./fonts/Font.css";
 
 // 전역적으로 스타일 적용하기 : createGlobalStyle 활용
 const GlobalStyle = createGlobalStyle`
@@ -22,6 +23,8 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
     margin-top: 90px;
     margin-bottom: 60px;
+
+    font-family: 'NanumSquareR';
   }
 `;
 

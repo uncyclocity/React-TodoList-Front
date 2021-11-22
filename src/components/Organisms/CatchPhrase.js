@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BtnKakaoLogin from "../Atoms/Button/BtnKakaoLogin";
+import TxtCatchPhrase from "../Atoms/Text/TxtCatchPhrase";
 
 const Styles = styled.div`
   display: flex;
@@ -9,12 +9,10 @@ const Styles = styled.div`
   height: 150px;
 `;
 
-export default function Login({ onClick }) {
+export default function CatchPhrase({ onClick }) {
   return (
     <Styles>
-      <div onClick={onClick}>
-        <BtnKakaoLogin />
-      </div>
+      <TxtCatchPhrase />
     </Styles>
   );
 }
