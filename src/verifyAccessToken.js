@@ -1,40 +1,11 @@
-import instance from "./instance";
-
-export default function verifyAccessToken(userDispatch, navigate) {
-  const loginUser = async (userInfo) => {
-    const { id, nickname, platform } = userInfo;
-    await instance({
-      method: "POST",
-      url: `/api/createMember`,
-      data: {
-        id,
-        nickname,
-        platform,
-      },
-    });
-    userDispatch({
-      type: "initiate",
-      id,
-      platform,
-      nickname,
-    });
-  };
-
-  const getUserInfo = async (accessToken) => {
-    await instance({
-      method: "GET",
-      url: `/api/getUserInfo?ACCESS_TOKEN=${accessToken}`,
-    }).then((res) => {
-      loginUser(res);
-      navigate("/");
-    });
-  };
-
+export default function VerifyAccessToken({ setNowPage, children }) {
   let storedAccessToken = localStorage.getItem("accessToken");
 
   if (storedAccessToken) {
-    getUserInfo(storedAccessToken);
+    setNowPage("logining");
   } else {
-    navigate("/login");
+    setNowPage("login");
   }
+
+  return <>{children}</>;
 }

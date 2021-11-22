@@ -10,7 +10,7 @@ const Styles = styled.div`
 `;
 
 export default function Login() {
-  const redirectUri = "http://localhost:3000/logining";
+  const redirectUri = "http://localhost:3000";
 
   const kakaoLogin = () => {
     const { Kakao } = window;

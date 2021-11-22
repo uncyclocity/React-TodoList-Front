@@ -1,9 +1,10 @@
+import { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import { createGlobalStyle } from "styled-components";
 import LoginingPageTemplate from "./components/Templates/LoginingPageTemplate";
 import LoginPageTemplate from "./components/Templates/LoginPageTemplate";
 import TodoPageTemplate from "./components/Templates/TodoPageTemplate";
 import TodoContext from "./TodoContext";
-import { Routes, Route } from "react-router-dom";
 import UserContext from "./UserContext";
 
 // 전역적으로 스타일 적용하기 : createGlobalStyle 활용
@@ -25,16 +26,30 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const [nowPage, setNowPage] = useState("");
+
+  const url = new URL(window.location.href);
+  const code = url.searchParams.get("code");
+
+  useEffect(() => {
+    let storedAccessToken = localStorage.getItem("accessToken");
+    if (storedAccessToken || code) {
+      setNowPage("logining");
+    } else {
+      setNowPage("login");
+    }
+  }, [code]);
+
   return (
     <>
       <GlobalStyle />
       <UserContext>
         <TodoContext>
-          <Routes>
-            <Route path="/" exact={true} element={<TodoPageTemplate />} />
-            <Route path="/login" element={<LoginPageTemplate />} />
-            <Route path="/logining" element={<LoginingPageTemplate />} />
-          </Routes>
+          {nowPage === "todo" && <TodoPageTemplate />}
+          {nowPage === "login" && <LoginPageTemplate />}
+          {nowPage === "logining" && (
+            <LoginingPageTemplate setNowPage={setNowPage} />
+          )}
         </TodoContext>
       </UserContext>
     </>
