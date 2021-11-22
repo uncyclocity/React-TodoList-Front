@@ -8,6 +8,8 @@ const Styles = styled.div`
   flex: 1;
   font-size: 21px;
   color: #495057;
+  display: flex;
+  align-items: center;
   ${({ done }) =>
     done &&
     css`
