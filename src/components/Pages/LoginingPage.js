@@ -15,10 +15,16 @@ export default function LoginingPage({ setNowPage }) {
     if (!storedAccessToken) {
       const url = new URL(window.location.href);
       const code = url.searchParams.get("code");
-      getAccessToken(code).then((accessToken) => {
-        localStorage.setItem("accessToken", accessToken);
-        setAccessToken(accessToken);
-      });
+      getAccessToken(code)
+        .then((accessToken) => {
+          localStorage.setItem("accessToken", accessToken);
+          setAccessToken(accessToken);
+        })
+        .catch((err) => {
+          console.error("액세스 토큰을 받아오는 도중 오류가 발생했습니다.");
+          localStorage.removeItem("accessToken");
+          setNowPage("login");
+        });
     } else {
       setAccessToken(storedAccessToken);
     }
@@ -29,12 +35,15 @@ export default function LoginingPage({ setNowPage }) {
     if (getUserInfoFirstCnt.current <= 0) {
       getUserInfoFirstCnt.current = 1;
     } else {
-      getUserInfo(accessToken).then((data) => {
-        console.log(data);
-        setUserInfo(data);
-      });
+      getUserInfo(accessToken)
+        .then((data) => setUserInfo(data))
+        .catch((err) => {
+          console.error("사용자 정보를 받아오는 도중 오류가 발생했습니다.");
+          localStorage.removeItem("accessToken");
+          setNowPage("login");
+        });
     }
-  }, [accessToken]);
+  }, [accessToken, setNowPage]);
 
   useEffect(() => {
     if (loginUserFirstCnt.current <= 0) {

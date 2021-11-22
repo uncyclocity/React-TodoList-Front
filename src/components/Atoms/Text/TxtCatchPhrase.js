@@ -8,15 +8,14 @@ const Styles = styled.div`
   font-size: 25px;
   color: #20c997;
   text-align: center;
-  font-style: italic;
 `;
 
 export default function TxtCatchPhrase() {
   return (
     <Styles>
-      “끝내주는 하루를 창조할
+      빛나는 하루를 만들어 나갈
       <br />
-      준비 되셨나요?”
+      준비 되셨나요?
     </Styles>
   );
 }
