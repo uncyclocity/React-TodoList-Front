@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useTodoDispatch } from "../../TodoContext";
+import { useTodoDispatch } from "../Contexts/TodoContext";
 import BtnRemoveTodo from "../Atoms/Button/BtnRemoveTodo";
 import CtnTodoItemBlock from "../Atoms/Container/CtnTodoItemBlock";
 import BtnTodoCheck from "../Atoms/Button/BtnTodoCheck";
 import TxtTodoName from "../Atoms/Text/TxtTodoName";
 import instance from "../../instance";
-import { useUser } from "../../UserContext";
+import { useUser } from "../Contexts/UserContext";
 
 const Styles = styled.div`
   .BtnTodoCheck {

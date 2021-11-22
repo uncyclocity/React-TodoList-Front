@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 import { createGlobalStyle } from "styled-components";
-import LoginingPageTemplate from "./components/Templates/LoginingPageTemplate";
-import LoginPageTemplate from "./components/Templates/LoginPageTemplate";
-import TodoPageTemplate from "./components/Templates/TodoPageTemplate";
-import TodoContext from "./TodoContext";
-import UserContext from "./UserContext";
+import LoginingPage from "./components/Pages/LoginingPage";
+import LoginPage from "./components/Pages/LoginPage";
+import TodoPage from "./components/Pages/TodoPage";
+import TodoContext from "./components/Contexts/TodoContext";
+import UserContext from "./components/Contexts/UserContext";
 
 // 전역적으로 스타일 적용하기 : createGlobalStyle 활용
 const GlobalStyle = createGlobalStyle`
@@ -45,11 +45,9 @@ function App() {
       <GlobalStyle />
       <UserContext>
         <TodoContext>
-          {nowPage === "todo" && <TodoPageTemplate />}
-          {nowPage === "login" && <LoginPageTemplate />}
-          {nowPage === "logining" && (
-            <LoginingPageTemplate setNowPage={setNowPage} />
-          )}
+          {nowPage === "todo" && <TodoPage />}
+          {nowPage === "login" && <LoginPage />}
+          {nowPage === "logining" && <LoginingPage setNowPage={setNowPage} />}
         </TodoContext>
       </UserContext>
     </>

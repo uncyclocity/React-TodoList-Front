@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import instance from "../../instance";
-import { useTodoDispatch, useTodoNextId } from "../../TodoContext";
-import { useUser } from "../../UserContext";
+import { useTodoDispatch, useTodoNextId } from "../Contexts/TodoContext";
+import { useUser } from "../Contexts/UserContext";
 import BtnInCreateTodoWindow from "../Atoms/Button/BtnInCreateTodoWindow";
 import TodoInsertForm from "../Molecules/TodoInsertForm";
 

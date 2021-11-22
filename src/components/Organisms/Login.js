@@ -9,18 +9,9 @@ const Styles = styled.div`
   height: 300px;
 `;
 
-export default function Login() {
-  const redirectUri = "http://localhost:3000";
-
-  const kakaoLogin = () => {
-    const { Kakao } = window;
-    Kakao.Auth.authorize({
-      redirectUri,
-    });
-  };
-
+export default function Login({ onClick }) {
   return (
-    <Styles onClick={kakaoLogin}>
+    <Styles onClick={onClick}>
       <BtnKakaoLogin />
     </Styles>
   );
