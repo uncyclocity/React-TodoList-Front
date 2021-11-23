@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const instance = axios.create({
-  baseURL: "http://localhost:3050",
+  baseURL: "https://react-todolist.herokuapp.com/",
   headers: {
     "Content-Type": "application/json",
   },

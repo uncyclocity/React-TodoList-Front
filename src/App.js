@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useState, useEffect } from "react";
 import { createGlobalStyle } from "styled-components";
 import LoginingPage from "./components/Pages/LoginingPage";
 import LoginPage from "./components/Pages/LoginPage";
