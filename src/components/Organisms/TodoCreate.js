@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import instance from "../../instance";
 import { useTodoDispatch, useTodoNextId } from "../Contexts/TodoContext";
 import { useUser } from "../Contexts/UserContext";
@@ -86,4 +86,4 @@ function TodoCreate() {
   );
 }
 
-export default React.memo(TodoCreate);
+export default TodoCreate;

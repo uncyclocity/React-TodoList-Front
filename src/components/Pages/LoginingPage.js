@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   getAccessToken,
   getUserInfo,
@@ -17,13 +17,13 @@ export default function LoginingPage({ setNowPage }) {
   const storedAccessToken = localStorage.getItem("accessToken");
   const storedRefreshToken = localStorage.getItem("refreshToken");
 
-  const goBackToLoginPage = () => {
+  const goBackToLoginPage = useCallback(() => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setNowPage("login");
-  };
+  }, [setNowPage]);
 
-  const _getAccessToken = () => {
+  const _getAccessToken = useCallback(() => {
     const url = new URL(window.location.href);
     const code = url.searchParams.get("code");
     getAccessToken(code)
@@ -36,9 +36,9 @@ export default function LoginingPage({ setNowPage }) {
         console.error("액세스 토큰을 받아오는 도중 오류가 발생했습니다.");
         goBackToLoginPage();
       });
-  };
+  }, [goBackToLoginPage]);
 
-  const _refreshAccessToken = () => {
+  const _refreshAccessToken = useCallback(() => {
     refreshAccessToken(storedRefreshToken)
       .then(({ accessToken }) => {
         localStorage.setItem("accessToken", accessToken);
@@ -48,9 +48,9 @@ export default function LoginingPage({ setNowPage }) {
         console.error("액세스 토큰을 받아오는 도중 오류가 발생했습니다.");
         goBackToLoginPage();
       });
-  };
+  }, [goBackToLoginPage, storedRefreshToken]);
 
-  const _getUserInfo = () => {
+  const _getUserInfo = useCallback(() => {
     getUserInfo(accessToken)
       .then((data) => setUserInfo(data))
       .catch((err) => {
@@ -62,7 +62,7 @@ export default function LoginingPage({ setNowPage }) {
           goBackToLoginPage();
         }
       });
-  };
+  }, [_refreshAccessToken, accessToken, goBackToLoginPage]);
 
   useEffect(() => {
     if (!storedAccessToken) {
@@ -70,8 +70,7 @@ export default function LoginingPage({ setNowPage }) {
     } else {
       setAccessToken(storedAccessToken);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [_getAccessToken, storedAccessToken]);
 
   useEffect(() => {
     if (getUserInfoFirstCnt.current <= 0) {
@@ -79,8 +78,7 @@ export default function LoginingPage({ setNowPage }) {
     } else {
       _getUserInfo();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
+  }, [_getUserInfo, accessToken]);
 
   useEffect(() => {
     if (loginUserFirstCnt.current <= 0) {
@@ -88,8 +86,7 @@ export default function LoginingPage({ setNowPage }) {
     } else {
       loginUser(userInfo, userDispatch).then(() => setNowPage("todo"));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userInfo]);
+  }, [setNowPage, userDispatch, userInfo]);
 
   return <LoginingPageTemplate />;
 }

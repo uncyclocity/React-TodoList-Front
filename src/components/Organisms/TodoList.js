@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import TodoItem from "../Molecules/TodoItem";
 import { useTodoDispatch, useTodos } from "../Contexts/TodoContext";
 import CtnTodoList from "../Atoms/Container/CtnTodoList";
@@ -50,4 +50,4 @@ function TodoList() {
   );
 }
 
-export default React.memo(TodoList);
+export default TodoList;

@@ -1,6 +1,5 @@
 import { MdAddCircleOutline } from "react-icons/md";
 import { useTodos } from "../Contexts/TodoContext";
-import React from "react";
 import CtnTodoHead from "../Atoms/Container/CtnTodoHead";
 import TxtTaskGuide from "../Atoms/Text/TxtTaskGuide";
 import TodoHeadTodayInfo from "../Molecules/TodoHeadTodayInfo";
@@ -42,4 +41,4 @@ function TodoHead() {
   );
 }
 
-export default React.memo(TodoHead);
+export default TodoHead;

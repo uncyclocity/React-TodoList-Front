@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useTodoDispatch } from "../Contexts/TodoContext";
 import BtnRemoveTodo from "../Atoms/Button/BtnRemoveTodo";
@@ -75,4 +75,4 @@ function TodoItem({ id, done, text }) {
   );
 }
 
-export default React.memo(TodoItem);
+export default TodoItem;
