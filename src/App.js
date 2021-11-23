@@ -9,6 +9,10 @@ import "./fonts/Font.css";
 
 // 전역적으로 스타일 적용하기 : createGlobalStyle 활용
 const GlobalStyle = createGlobalStyle`
+  html {
+    height: 100%;
+  }
+
   body {
     background: #e9ecef;
     -webkit-touch-callout: none;
@@ -18,10 +22,11 @@ const GlobalStyle = createGlobalStyle`
     -ms-user-select: none;
     user-select: none;
 
+    height: 100%;
+
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-top: 90px;
-    margin-bottom: 60px;
 
     font-family: 'NanumSquareR';
   }
