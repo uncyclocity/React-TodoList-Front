@@ -1,7 +1,7 @@
 import LoginPageTemplate from "../Templates/LoginPageTemplate";
 
 export default function LoginPage() {
-  const redirectUri = "http://localhost:3000";
+  const redirectUri = "https://react-todolist.herokuapp.com";
 
   const kakaoLogin = () => {
     const { Kakao } = window;
