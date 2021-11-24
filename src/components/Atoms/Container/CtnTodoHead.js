@@ -7,6 +7,10 @@ import styled from "styled-components";
 const Styles = styled.div`
   padding: 48px 32px 24px 32px;
   border-bottom: 1px solid #e9ecef;
+
+  @media screen and (max-width: 700px) {
+    padding: 32px 24px 12px 24px;
+  }
 `;
 
 export default function CtnTodoHead({ children }) {

@@ -8,6 +8,10 @@ const Styles = styled.div`
   font-size: 36px;
   color: #343a40;
   font-family: "NanumSquareEB";
+
+  @media screen and (max-width: 700px) {
+    font-size: 27px;
+  }
 `;
 
 export default function TxtTodayMonthAndDate({ dateString }) {

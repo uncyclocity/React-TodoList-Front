@@ -11,6 +11,10 @@ const Styles = styled.div`
   flex-direction: column;
   background: #20c997;
   border-radius: 16px 16px 0 0;
+
+  @media screen and (max-width: 700px) {
+    height: 250px;
+  }
 `;
 
 export default function Logo() {

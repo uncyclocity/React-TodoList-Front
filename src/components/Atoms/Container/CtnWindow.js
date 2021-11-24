@@ -13,6 +13,11 @@ const Styles = styled.div`
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 700px) {
+    width: 340px;
+    height: 570px;
+  }
 `;
 
 export default function CtnWindow({ children }) {

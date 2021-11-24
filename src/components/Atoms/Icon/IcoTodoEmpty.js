@@ -8,6 +8,11 @@ import { IoIosCloudOutline } from "react-icons/io";
 const Styles = styled.div`
   font-size: 100px;
   height: 100px;
+
+  @media screen and (max-width: 700px) {
+    font-size: 70px;
+    height: 70px;
+  }
 `;
 
 export default function IcoTodoEmpty() {

@@ -7,6 +7,10 @@ import styled from "styled-components";
 const Styles = styled.div`
   font-size: 21px;
   color: #868e96;
+
+  @media screen and (max-width: 700px) {
+    font-size: 18px;
+  }
 `;
 
 export default function TxtTodayDay({ day }) {

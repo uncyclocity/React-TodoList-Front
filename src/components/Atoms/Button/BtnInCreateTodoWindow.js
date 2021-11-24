@@ -43,6 +43,12 @@ const Styles = styled.div`
   font-size: 60px;
   color: white;
 
+  @media screen and (max-width: 700px) {
+    width: 60px;
+    height: 60px;
+    font-size: 45px;
+  }
+
   ${(props) =>
     props.open &&
     css`

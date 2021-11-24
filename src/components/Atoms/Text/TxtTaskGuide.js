@@ -13,6 +13,15 @@ const Styles = styled.div`
     transform: translate(0, 16%);
   }
   font-family: "NanumSquareEB";
+
+  @media screen and (max-width: 700px) {
+    font-size: 12px;
+    margin-top: 25px;
+    .addIcon {
+      font-size: 13px;
+      transform: translate(0, 16%);
+    }
+  }
 `;
 
 export default function TxtTaskGuide({ msg }) {

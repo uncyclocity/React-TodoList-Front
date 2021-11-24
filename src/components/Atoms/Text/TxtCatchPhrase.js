@@ -8,6 +8,10 @@ const Styles = styled.div`
   font-size: 25px;
   color: #20c997;
   text-align: center;
+
+  @media screen and (max-width: 700px) {
+    font-size: 20px;
+  }
 `;
 
 export default function TxtCatchPhrase() {
