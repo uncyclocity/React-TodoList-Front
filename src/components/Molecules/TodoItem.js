@@ -11,6 +11,9 @@ import { useUser } from "../Contexts/UserContext";
 const Styles = styled.div`
   .BtnTodoCheck {
     margin-right: 20px;
+    @media screen and (max-width: 700px) {
+      margin-right: 12px;
+    }
   }
 `;
 

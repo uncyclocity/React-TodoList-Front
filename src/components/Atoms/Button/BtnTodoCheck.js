@@ -28,6 +28,11 @@ const Styles = styled.div`
     box-shadow: 0 0 8px 0 #38d9a9;
   }
 
+  @media screen and (max-width: 700px) {
+    width: 24px;
+    height: 24px;
+  }
+
   ${({ done }) =>
     done &&
     css`

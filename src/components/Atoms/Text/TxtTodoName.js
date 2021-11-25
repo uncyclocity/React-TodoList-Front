@@ -15,6 +15,10 @@ const Styles = styled.div`
     css`
       color: #ced4da;
     `}
+
+  @media screen and (max-width: 700px) {
+    font-size: 17px;
+  }
 `;
 
 export default function TxtTodoName({ done, text }) {

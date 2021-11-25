@@ -12,6 +12,10 @@ const Styles = styled.input`
   outline: none;
   font-size: 18px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 700px) {
+    font-size: 13px;
+  }
 `;
 
 export default function IptNewTodo({ textInput }) {

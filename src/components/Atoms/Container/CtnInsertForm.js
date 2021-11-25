@@ -25,6 +25,10 @@ const InsertForm = styled.form`
   animation: 0.25s ease-out 0s ${slideUp};
   animation-fill-mode: forwards;
 
+  @media screen and (max-width: 700px) {
+    padding: 24px 24px 64px 24px;
+  }
+
   ${(props) =>
     props.disappear &&
     css`

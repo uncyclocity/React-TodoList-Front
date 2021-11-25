@@ -15,6 +15,10 @@ const Styles = styled.div`
   &:hover {
     color: #ff6b6b;
   }
+
+  @media screen and (max-width: 700px) {
+    font-size: 18px;
+  }
 `;
 
 export default function BtnRemoveTodo({ onRemove }) {

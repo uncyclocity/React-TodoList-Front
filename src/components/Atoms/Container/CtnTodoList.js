@@ -12,6 +12,11 @@ const Styles = styled.div`
   margin: 5px 10px 5px 0;
   overflow-y: auto;
 
+  @media screen and (max-width: 700px) {
+    padding: 12px 24px;
+    padding-bottom: 32px;
+  }
+
   &::-webkit-scrollbar {
     width: 10px;
   }
