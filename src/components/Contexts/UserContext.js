@@ -8,6 +8,7 @@ export default function UserContext({ children }) {
     id: null,
     nickname: null,
     platform: null,
+    removing: false,
   };
 
   const reducer = (user, action) => {
@@ -17,6 +18,12 @@ export default function UserContext({ children }) {
           id: action.id,
           nickname: action.nickname,
           platform: action.platform,
+        };
+      }
+      case "SET_REMOVING": {
+        return {
+          ...user,
+          removing: action.isRemoving,
         };
       }
       default:

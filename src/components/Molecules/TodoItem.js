@@ -6,7 +6,7 @@ import CtnTodoItemBlock from "../Atoms/Container/CtnTodoItemBlock";
 import BtnTodoCheck from "../Atoms/Button/BtnTodoCheck";
 import TxtTodoName from "../Atoms/Text/TxtTodoName";
 import instance from "../../instance";
-import { useUser } from "../Contexts/UserContext";
+import { useUser, useUserDispatch } from "../Contexts/UserContext";
 
 const Styles = styled.div`
   .BtnTodoCheck {
@@ -20,19 +20,24 @@ const Styles = styled.div`
 function TodoItem({ id, done, text }) {
   console.log("TodoItem()");
 
-  const { id: userId, platform: userPlatform } = useUser();
+  const { id: userId, platform: userPlatform, removing } = useUser();
+  const userDispatch = useUserDispatch();
   const dispatch = useTodoDispatch();
   const [rmCnt, setRmCnt] = useState(false);
   const [isViewRmBtn, setIsViewRmBtn] = useState(false);
 
   const onRemove = useCallback(() => {
     setRmCnt(true);
-    setTimeout(() => {
+    userDispatch({
+      type: "SET_REMOVING",
+      isRemoving: true,
+    });
+    setTimeout(async () => {
       dispatch({
         type: "REMOVE_TODO",
         id,
       });
-      instance({
+      await instance({
         method: "POST",
         url: "/api/deleteTodo",
         data: {
@@ -41,8 +46,12 @@ function TodoItem({ id, done, text }) {
           id,
         },
       });
+      userDispatch({
+        type: "SET_REMOVING",
+        isRemoving: false,
+      });
     }, 250);
-  }, [dispatch, id, userId, userPlatform]);
+  }, [dispatch, id, userDispatch, userId, userPlatform]);
 
   const onCheck = useCallback(() => {
     dispatch({
@@ -72,7 +81,7 @@ function TodoItem({ id, done, text }) {
           <BtnTodoCheck done={done} onCheck={onCheck} />
         </div>
         <TxtTodoName done={done} text={text} />
-        {isViewRmBtn && <BtnRemoveTodo onRemove={onRemove} />}
+        {isViewRmBtn && !removing && <BtnRemoveTodo onRemove={onRemove} />}
       </CtnTodoItemBlock>
     </Styles>
   );
