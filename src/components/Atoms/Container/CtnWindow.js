@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { slideUp } from "../../../keyfremes/TodoCreateWindowAnimation";
 
 // CtnWindow
 // 분류 : 컨테이너
@@ -13,6 +14,9 @@ const Styles = styled.div`
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
+
+  animation: 0.25s ease-out 0s ${slideUp};
+  animation-fill-mode: forwards;
 
   @media screen and (max-width: 700px) {
     width: 340px;
