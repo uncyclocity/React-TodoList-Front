@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const Styles = styled.div`
   font-size: 30px;
-  color: #ffffff;
+  color: #20c997;
   font-family: "NanumSquareEB";
   text-align: center;
 `;

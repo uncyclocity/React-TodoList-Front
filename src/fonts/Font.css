@@ -9,6 +9,11 @@
 }
 
 @font-face {
+  font-family: NanumSquareB;
+  src: url(./NanumSquareB.woff);
+}
+
+@font-face {
   font-family: NanumSquareRoundEB;
   src: url(./NanumSquareRoundEB.woff);
 }

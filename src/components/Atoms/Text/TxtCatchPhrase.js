@@ -5,9 +5,10 @@ import styled from "styled-components";
 // 용도 : 로그인 창의 캐치프레이즈
 
 const Styles = styled.div`
-  font-size: 25px;
-  color: #20c997;
+  font-size: 24px;
   text-align: center;
+  font-family: NanumSquareR;
+  color: #5b5b5b;
 
   @media screen and (max-width: 700px) {
     font-size: 20px;
@@ -19,7 +20,7 @@ export default function TxtCatchPhrase() {
     <Styles>
       빛나는 하루를 만들어 나갈
       <br />
-      준비 되셨나요?
+      준비가 되었나요?
     </Styles>
   );
 }
