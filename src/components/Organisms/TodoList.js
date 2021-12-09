@@ -21,7 +21,7 @@ function TodoList() {
   useEffect(() => {
     instance({
       method: "POST",
-      url: "/api/getTodos",
+      url: "/get/todos",
       data: {
         userId,
         userPlatform,

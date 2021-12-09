@@ -45,7 +45,7 @@ function TodoCreate() {
           dispatch(addTarget);
           instance({
             method: "POST",
-            url: "/api/createTodo",
+            url: "/post/todo",
             data: {
               userId,
               userPlatform,

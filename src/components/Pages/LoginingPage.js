@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  getAccessToken,
-  getUserInfo,
-  loginUser,
-  refreshAccessToken,
+  doGet,
+  doPost
 } from "../../LoginFuncs";
 import { useUserDispatch } from "../Contexts/UserContext";
 import LoginingPageTemplate from "../Templates/LoginingPageTemplate";
@@ -23,10 +21,10 @@ export default function LoginingPage({ setNowPage }) {
     setNowPage("login");
   }, [setNowPage]);
 
-  const _getAccessToken = useCallback(() => {
+  const getAccessToken = useCallback(() => {
     const url = new URL(window.location.href);
     const code = url.searchParams.get("code");
-    getAccessToken(code)
+    doGet.accessToken(code)
       .then(({ accessToken, refreshToken }) => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
@@ -38,8 +36,8 @@ export default function LoginingPage({ setNowPage }) {
       });
   }, [goBackToLoginPage]);
 
-  const _refreshAccessToken = useCallback(() => {
-    refreshAccessToken(storedRefreshToken)
+  const refreshAccessToken = useCallback(() => {
+    doPost.accessToken(storedRefreshToken)
       .then(({ accessToken }) => {
         localStorage.setItem("accessToken", accessToken);
         setAccessToken(accessToken);
@@ -51,26 +49,26 @@ export default function LoginingPage({ setNowPage }) {
   }, [goBackToLoginPage, storedRefreshToken]);
 
   const _getUserInfo = useCallback(() => {
-    getUserInfo(accessToken)
+    doGet.userinfo(accessToken)
       .then((data) => setUserInfo(data))
       .catch((err) => {
         const errStatus = err.response.status;
         if (errStatus === 422) {
-          _refreshAccessToken();
+          refreshAccessToken();
         } else {
           console.error("사용자 정보를 받아오는 도중 오류가 발생했습니다.");
           goBackToLoginPage();
         }
       });
-  }, [_refreshAccessToken, accessToken, goBackToLoginPage]);
+  }, [refreshAccessToken, accessToken, goBackToLoginPage]);
 
   useEffect(() => {
     if (!storedAccessToken) {
-      _getAccessToken();
+      getAccessToken();
     } else {
       setAccessToken(storedAccessToken);
     }
-  }, [_getAccessToken, storedAccessToken]);
+  }, [getAccessToken, storedAccessToken]);
 
   useEffect(() => {
     if (getUserInfoFirstCnt.current <= 0) {
@@ -84,7 +82,7 @@ export default function LoginingPage({ setNowPage }) {
     if (loginUserFirstCnt.current <= 0) {
       loginUserFirstCnt.current = 1;
     } else {
-      loginUser(userInfo, userDispatch).then(() => setNowPage("todo"));
+      doPost.member(userInfo, userDispatch).then(() => setNowPage("todo"));
     }
   }, [setNowPage, userDispatch, userInfo]);
 

@@ -38,8 +38,8 @@ function TodoItem({ id, done, text }) {
         id,
       });
       await instance({
-        method: "POST",
-        url: "/api/deleteTodo",
+        method: "DELETE",
+        url: "/delete/todo",
         data: {
           userId,
           userPlatform,
@@ -60,8 +60,8 @@ function TodoItem({ id, done, text }) {
       isDone: !done,
     });
     instance({
-      method: "POST",
-      url: "/api/changeTodoStatus",
+      method: "PUT",
+      url: "/put/todostatus",
       data: {
         userId,
         userPlatform,
