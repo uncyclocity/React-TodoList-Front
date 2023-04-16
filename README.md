@@ -1,7 +1,6 @@
 # 📅 React-TodoList-Front
 
 **React.js** 학습을 목적으로 제작하게 된 투두리스트의 프론트엔드 단입니다. <br>
-<s><a href="https://react-todo-list-lyart-tau.vercel.app">이곳</a>에서 직접 사용하실 수 있습니다.</s> 현재 접속 불가능
 
 ## 📃 개요
 
